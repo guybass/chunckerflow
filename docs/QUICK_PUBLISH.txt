@@ -14,17 +14,34 @@
 □ Git committed and pushed
 
 ═══════════════════════════════════════════════
-  OPTION 1: AUTOMATED (Easiest)
+  OPTION 1: QUICK PUBLISH (Recommended)
 ═══════════════════════════════════════════════
 
-Run the publish script:
+Skip local tests, let GitHub Actions handle testing:
+
+    publish_quick.bat
+
+This script:
+  • Cleans build artifacts
+  • Cleans Jupyter notebooks
+  • Builds packages
+  • Validates distribution
+  • Uploads to PyPI
+
+Tests run automatically on GitHub Actions when you push.
+
+═══════════════════════════════════════════════
+  OPTION 2: FULL LOCAL VALIDATION
+═══════════════════════════════════════════════
+
+Run tests locally before publishing:
 
     publish.bat
 
-Follow the prompts. Done!
+This script runs all tests locally (requires pytest).
 
 ═══════════════════════════════════════════════
-  OPTION 2: MANUAL (Step-by-Step)
+  OPTION 3: MANUAL (Step-by-Step)
 ═══════════════════════════════════════════════
 
 1. Clean previous builds:

@@ -55,10 +55,20 @@ coverage.xml
 dmypy.json
 .pytype/
 
-# Environment variables
+# Environment variables and secrets
 .env
 .env.*
 !.env.example
+.pypirc
+*.pypirc
+*token*
+*secret*
+*credentials*
+*password*
+*.key
+*.pem
+*.p12
+*.pfx
 
 # Data files (NEVER commit data)
 *.csv

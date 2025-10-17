@@ -188,12 +188,29 @@ See [rag-summery-framework.md](rag-summery-framework.md) for comprehensive resea
 
 ## Documentation
 
-- **[Getting Started](docs/getting-started.md)** - Installation and first steps
-- **[Chunking Strategies](docs/concepts/chunking-strategies.md)** - Detailed guide to all strategies
-- **[Embedding Providers](docs/concepts/embeddings.md)** - Provider integration guide
-- **[Evaluation Metrics](docs/concepts/evaluation.md)** - Understanding metrics
-- **[API Reference](docs/api-reference/)** - Complete API documentation
-- **[Tutorials](docs/tutorials/)** - Jupyter notebooks with examples
+### Core Documentation
+
+- **[Publishing Guide](docs/BUILD_AND_PUBLISH.md)** - How to publish ChunkFlow to PyPI
+- **[Project Summary](docs/PROJECT_SUMMARY.md)** - Complete project overview
+- **[Security Guide](docs/SECURITY_WARNING.md)** - API token security (important!)
+- **[Quick Reference](docs/QUICK_PUBLISH.txt)** - Publishing quick reference
+
+### Interactive Tutorials
+
+- **[Jupyter Notebooks](examples/jupyter/)** - 5 interactive tutorials
+  - 01: Getting Started
+  - 02: Strategy Comparison
+  - 03: Advanced Metrics
+  - 04: Visualization & Analysis
+  - 05: API Usage
+
+### Code Examples
+
+- **[Python Examples](examples/)** - Working code examples
+  - Basic usage
+  - Strategy comparison
+  - Analysis and visualization
+  - API client usage
 
 ## Development
 

@@ -1,6 +1,7 @@
 @echo off
 REM ===================================
-REM ChunkFlow Build and Publish Script
+REM ChunkFlow Quick Publish Script
+REM (No local tests - relies on GitHub Actions)
 REM ===================================
 
 REM Change to the directory where this script is located
@@ -8,14 +9,17 @@ cd /d "%~dp0"
 
 echo.
 echo ===================================
-echo ChunkFlow Build and Publish Script
+echo ChunkFlow Quick Publish Script
 echo ===================================
 echo.
 echo Working directory: %CD%
 echo.
+echo NOTE: This script skips local tests.
+echo Tests will run automatically on GitHub Actions when you push to main.
+echo.
 
 REM Step 1: Clean old builds
-echo [1/6] Cleaning old builds...
+echo [1/4] Cleaning old builds...
 if exist build rmdir /s /q build 2>nul
 if exist dist rmdir /s /q dist 2>nul
 if exist chunk_flow.egg-info rmdir /s /q chunk_flow.egg-info 2>nul
@@ -24,7 +28,7 @@ echo     Done.
 echo.
 
 REM Step 2: Clean notebooks
-echo [2/6] Cleaning Jupyter notebooks...
+echo [2/4] Cleaning Jupyter notebooks...
 if exist clean_notebooks.py (
     python clean_notebooks.py
     if %errorlevel% neq 0 (
@@ -37,34 +41,8 @@ if exist clean_notebooks.py (
 )
 echo.
 
-REM Step 3: Run tests (optional - skipped if pytest not available)
-echo [3/6] Checking tests...
-where pytest >nul 2>&1
-if %errorlevel% neq 0 (
-    echo     pytest not found - SKIPPING TESTS
-    echo     NOTE: Tests will run automatically on GitHub Actions when you push to main
-    echo.
-) else (
-    echo     Running tests...
-    pytest -q
-    if %errorlevel% neq 0 (
-        echo.
-        echo WARNING: Tests failed!
-        echo Do you want to continue anyway? (y/n)
-        set /p continue=
-        if /i not "%continue%"=="y" (
-            echo Publishing cancelled.
-            pause
-            exit /b 1
-        )
-    ) else (
-        echo     Tests passed.
-    )
-    echo.
-)
-
-REM Step 4: Build distribution
-echo [4/6] Building distribution packages...
+REM Step 3: Build distribution
+echo [3/4] Building distribution packages...
 python -m build
 if %errorlevel% neq 0 (
     echo.
@@ -75,8 +53,8 @@ if %errorlevel% neq 0 (
 echo     Build complete.
 echo.
 
-REM Step 5: Check distribution
-echo [5/6] Validating distribution packages...
+REM Step 4: Check distribution
+echo [4/4] Validating distribution packages...
 twine check dist/*
 if %errorlevel% neq 0 (
     echo.
@@ -87,16 +65,30 @@ if %errorlevel% neq 0 (
 echo     Validation passed.
 echo.
 
-REM Step 6: Upload to PyPI
-echo [6/6] Uploading to PyPI...
+REM Upload to PyPI
+echo ===================================
+echo Ready to upload to PyPI
+echo ===================================
 echo.
-echo IMPORTANT: You need your PyPI API token
+echo Files to upload:
+dir /b dist\*
 echo.
-echo   When prompted, enter:
-echo     Username: __token__
-echo     Password: pypi-... (paste your PyPI token)
+echo Checking for .pypirc configuration...
+if exist "%USERPROFILE%\.pypirc" (
+    echo   ✓ Found .pypirc - will use stored credentials
+    echo   No password prompt needed!
+) else (
+    echo   ⚠ .pypirc not found
+    echo.
+    echo   You will be prompted for credentials:
+    echo     Username: __token__
+    echo     Password: pypi-... (paste your PyPI token)
+    echo.
+    echo   TIP: Create %USERPROFILE%\.pypirc to avoid prompts
+    echo   See docs\SECURITY_WARNING.md for instructions
+)
 echo.
-echo Press any key to continue with upload...
+echo Press any key to continue with upload, or Ctrl+C to cancel...
 pause >nul
 echo.
 
@@ -124,8 +116,9 @@ echo Package available at: https://pypi.org/project/chunk-flow/
 echo.
 echo Next steps:
 echo   1. Create git tag: git tag -a v0.1.0 -m "Release v0.1.0"
-echo   2. Push tag: git push origin v0.1.0
-echo   3. Create GitHub release with dist/ files
-echo   4. Update version to next dev version (e.g., 0.2.0.dev0)
+echo   2. Push to GitHub: git push origin main --tags
+echo   3. GitHub Actions will run tests automatically
+echo   4. Create GitHub release with dist/ files
+echo   5. Update version to next dev version (e.g., 0.2.0.dev0)
 echo.
 pause
