@@ -1,80 +1,111 @@
 # Contributing to ChunkFlow
 
-Thank you for your interest in contributing to ChunkFlow! This document provides guidelines and instructions for contributing.
+Thank you for your interest in ChunkFlow!
 
-## Code of Conduct
+## Project Status
 
-Be respectful, inclusive, and collaborative. We're building this for the community, and we welcome contributors of all backgrounds and skill levels.
+ChunkFlow is currently a **solo project** developed and maintained by a single author. While the codebase is open-source and available for use under the MIT License, **contributions are not currently being accepted**.
 
-## How to Contribute
+## How You Can Help
 
-### Reporting Bugs
+While we're not accepting code contributions at this time, you can still help:
 
-- Use GitHub Issues to report bugs
-- Include clear description, steps to reproduce, expected vs actual behavior
-- Provide Python version, OS, and relevant dependencies
-- Include code snippets or minimal reproducible examples
+- **Report Bugs**: Open GitHub Issues with detailed bug reports
+- **Suggest Features**: Share your ideas via GitHub Issues
+- **Spread the Word**: Star the repo, share on social media
+- **Use ChunkFlow**: Build amazing things and share your experiences
 
-### Suggesting Features
+## Reporting Bugs
 
-- Open a GitHub Issue with the "enhancement" label
-- Describe the use case and why it's valuable
-- Provide examples of how it would be used
-- Discuss implementation approach if you have ideas
+When reporting bugs, please include:
 
-### Pull Requests
+- Clear description of the issue
+- Steps to reproduce the behavior
+- Expected vs actual behavior
+- Python version, OS, and relevant dependencies
+- Code snippets or minimal reproducible examples
+- Full error traceback
 
-1. **Fork the repository** and create a branch from `main`
-2. **Install development dependencies**: `make install-dev`
-3. **Make your changes** following our coding standards
-4. **Add tests** for new functionality
-5. **Run the test suite**: `make test`
-6. **Format and lint**: `make format && make lint`
-7. **Commit with clear messages** (see Commit Guidelines below)
-8. **Push to your fork** and submit a Pull Request
+**Example Bug Report:**
 
-## Development Setup
+```
+Title: RecursiveChunker fails on empty input
 
-```bash
-# Clone your fork
-git clone https://github.com/YOUR-USERNAME/chunk-flow.git
-cd chunk-flow
+Description:
+The RecursiveCharacterChunker raises an unexpected IndexError
+when given an empty string instead of returning an empty list.
 
-# Install with development dependencies
-make install-dev
+Steps to Reproduce:
+1. Create RecursiveCharacterChunker with default config
+2. Call chunk("") with empty string
+3. See error
 
-# Set up pre-commit hooks
-pre-commit install
+Expected: Returns ChunkResult with empty chunks list
+Actual: Raises IndexError
 
-# Run tests
-make test
+Environment:
+- Python 3.11.2
+- chunk-flow 0.1.0
+- OS: Windows 11
 
-# Format code
-make format
-
-# Lint code
-make lint
+Error Traceback:
+IndexError: string index out of range
+  at chunk_flow/chunking/strategies/recursive.py:45
 ```
 
-## Coding Standards
+## Suggesting Features
+
+When suggesting features, please include:
+
+- **Use case**: Describe the problem you're trying to solve
+- **Proposed solution**: How should this feature work?
+- **Examples**: Show how you'd use this feature
+- **Research**: Link to relevant papers or implementations
+- **Alternatives**: What alternatives did you consider?
+
+**Example Feature Request:**
+
+```
+Title: Add support for PDF chunking
+
+Use Case:
+Users want to chunk PDF documents directly without manual extraction.
+
+Proposed Solution:
+New PDFChunker strategy that extracts text and respects PDF structure
+(pages, sections, etc.)
+
+Example Usage:
+chunker = StrategyRegistry.create("pdf", {"respect_pages": True})
+result = await chunker.chunk_file("document.pdf")
+
+Related Research:
+- PyPDF2 library for PDF extraction
+- Similar to MarkdownChunker but for PDF structure
+
+Alternatives:
+- Users manually extract with PyPDF2 then use existing chunkers
+```
+
+## Code Standards (For Reference)
+
+If you're forking or learning from the codebase, here are the standards used:
 
 ### Python Style
-
 - Follow PEP 8 (enforced by Black and Ruff)
-- Use type hints for all functions
-- Write docstrings for all public APIs (Google style)
+- Type hints for all functions
+- Google-style docstrings for all public APIs
 - Maximum line length: 100 characters
 - Use f-strings for formatting
 
 ### Code Quality
+- NO print statements - use structured logging (structlog)
+- Type hints required for all function signatures
+- Docstrings required for all public functions/classes
+- Comprehensive test coverage
+- Async-first design
 
-- **NO print statements** - use structured logging (structlog/logging)
-- **Type hints required** for all function signatures
-- **Docstrings required** for all public functions/classes
-- **Tests required** for all new functionality
-- **Aim for 80%+ test coverage**
-
-### Example Code
+### Example
 
 ```python
 import structlog
@@ -116,140 +147,16 @@ async def chunk_text(
     return chunks
 ```
 
-## Commit Guidelines
-
-We use Conventional Commits for clear history:
-
-- `feat:` New feature
-- `fix:` Bug fix
-- `docs:` Documentation changes
-- `style:` Code style changes (formatting, no logic change)
-- `refactor:` Code refactoring
-- `test:` Adding or updating tests
-- `chore:` Maintenance tasks (dependencies, build)
-- `perf:` Performance improvements
-
-Examples:
-```
-feat: add semantic chunking strategy
-fix: handle empty documents in recursive chunker
-docs: update embedding provider guide
-test: add integration tests for OpenAI provider
-```
-
-## Testing Guidelines
-
-### Test Structure
-
-```
-tests/
-├── unit/           # Fast, isolated tests with mocked dependencies
-├── integration/    # Tests with real dependencies (APIs, databases)
-├── e2e/            # Full workflow tests
-└── benchmarks/     # Performance benchmarks
-```
-
-### Writing Tests
-
-```python
-import pytest
-from chunk_flow.chunking import RecursiveCharacterChunker
-
-
-class TestRecursiveCharacterChunker:
-    """Test suite for RecursiveCharacterChunker."""
-
-    def test_chunks_simple_text(self) -> None:
-        """Test chunking of simple text."""
-        chunker = RecursiveCharacterChunker(config={"chunk_size": 10})
-        text = "Hello world! This is a test."
-
-        result = await chunker.chunk(text)
-
-        assert len(result.chunks) > 0
-        assert all(len(chunk) <= 10 for chunk in result.chunks)
-
-    @pytest.mark.integration
-    async def test_with_real_api(self) -> None:
-        """Integration test with real API."""
-        # Test with actual API calls
-        pass
-```
-
-### Test Markers
-
-- `@pytest.mark.slow` - Slow tests (skip in CI)
-- `@pytest.mark.integration` - Integration tests
-- `@pytest.mark.e2e` - End-to-end tests
-- `@pytest.mark.benchmark` - Benchmark tests
-
-## Documentation
-
-- Update docstrings for any changed functions
-- Add examples to documentation for new features
-- Update README.md if adding major features
-- Create tutorial notebooks for complex features
-
-## Pull Request Process
-
-1. **Update CHANGELOG.md** with your changes
-2. **Ensure all tests pass** (`make test`)
-3. **Ensure code is formatted** (`make format`)
-4. **Ensure linting passes** (`make lint`)
-5. **Update documentation** if needed
-6. **Request review** from maintainers
-7. **Address feedback** and update PR
-
-### PR Checklist
-
-- [ ] Tests added/updated
-- [ ] Documentation updated
-- [ ] CHANGELOG.md updated
-- [ ] Code formatted (Black + isort)
-- [ ] Linting passes (Ruff + mypy)
-- [ ] All tests pass
-- [ ] No merge conflicts
-- [ ] Descriptive commit messages
-
-## Adding New Components
-
-### New Chunking Strategy
-
-1. Create file in `chunk_flow/chunking/strategies/`
-2. Inherit from `ChunkingStrategy`
-3. Implement abstract methods
-4. Add tests in `tests/unit/chunking/`
-5. Register in strategy registry
-6. Add documentation
-
-### New Embedding Provider
-
-1. Create file in `chunk_flow/embeddings/providers/`
-2. Inherit from `EmbeddingProvider`
-3. Implement abstract methods
-4. Add tests (with mocked API calls)
-5. Add to factory
-6. Update documentation
-
-### New Evaluation Metric
-
-1. Create file in `chunk_flow/evaluation/metrics/`
-2. Inherit from `EvaluationMetric`
-3. Implement `compute()` method
-4. Add tests with known ground truth
-5. Register in metric registry
-6. Add documentation
-
 ## Questions?
 
-- Open a GitHub Discussion
-- Tag maintainers in issues
-- Join our community chat (link TBD)
+- **GitHub Issues**: For bugs and feature requests
+- **GitHub Discussions**: For general questions and discussions
+- **Documentation**: Check the `/docs` folder for guides
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the MIT License.
+By using ChunkFlow, you agree to the terms of the MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
-Thank you for contributing to ChunkFlow! Together we're building the framework the RAG community needs.
+**Built with passion for the neglected field of text chunking** 🚀

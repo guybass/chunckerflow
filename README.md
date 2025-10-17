@@ -2,9 +2,12 @@
 
 **Production-grade async text chunking framework for RAG systems**
 
+[![PyPI version](https://badge.fury.io/py/chunk-flow.svg)](https://badge.fury.io/py/chunk-flow)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/chunk-flow)](https://pypi.org/project/chunk-flow/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/chunk-flow)](https://pypi.org/project/chunk-flow/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![GitHub stars](https://img.shields.io/github/stars/chunkflow/chunk-flow?style=social)](https://github.com/chunkflow/chunk-flow)
 
 ChunkFlow is a comprehensive, extensible framework for text chunking in Retrieval-Augmented Generation (RAG) systems. Built with production-grade practices, it provides multiple chunking strategies, pluggable embedding providers, and comprehensive evaluation metrics to help you make data-driven decisions.
 
@@ -215,11 +218,14 @@ make ci
 
 ## Contributing
 
-We welcome contributions! ChunkFlow is built for the community, by the community.
+ChunkFlow is currently a solo project. While contributions are not being accepted at this time, you can:
 
-- **Issues**: Report bugs or request features on [GitHub Issues](https://github.com/chunkflow/chunk-flow/issues)
-- **Pull Requests**: See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines
-- **Discussions**: Join our [GitHub Discussions](https://github.com/chunkflow/chunk-flow/discussions)
+- **Report Bugs**: [GitHub Issues](https://github.com/chunkflow/chunk-flow/issues)
+- **Request Features**: [GitHub Issues](https://github.com/chunkflow/chunk-flow/issues)
+- **Ask Questions**: [GitHub Discussions](https://github.com/chunkflow/chunk-flow/discussions)
+- **Star the Repo**: Help spread the word!
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
 
 ## Roadmap
 
@@ -267,7 +273,7 @@ If you use ChunkFlow in your research, please cite:
 ```bibtex
 @software{chunkflow2024,
   title = {ChunkFlow: Production-Grade Text Chunking Framework for RAG Systems},
-  author = {ChunkFlow Contributors},
+  author = {ChunkFlow Development},
   year = {2024},
   url = {https://github.com/chunkflow/chunk-flow}
 }
@@ -275,7 +281,7 @@ If you use ChunkFlow in your research, please cite:
 
 ## Acknowledgments
 
-ChunkFlow builds on research from Jina AI, ExplodingGradients, and the broader RAG community. Special thanks to all contributors and the open-source community.
+ChunkFlow builds on research from Jina AI, ExplodingGradients, and the broader RAG community. Built with passion for the neglected field of text chunking.
 
 ---
 
