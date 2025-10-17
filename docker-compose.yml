@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  # ChunkFlow API service
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: chunkflow:latest
+    container_name: chunkflow-api
+    ports:
+      - "8000:8000"
+    environment:
+      # Logging
+      - CHUNK_FLOW_LOG_LEVEL=INFO
+      - CHUNK_FLOW_LOG_FORMAT=json
+
+      # API Keys (use .env file for secrets)
+      - CHUNK_FLOW_OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - CHUNK_FLOW_GOOGLE_API_KEY=${GOOGLE_API_KEY:-}
+
+      # Configuration
+      - CHUNK_FLOW_DEFAULT_STRATEGY=recursive
+      - CHUNK_FLOW_DEFAULT_EMBEDDING_PROVIDER=huggingface
+
+    volumes:
+      # Mount config directory
+      - ./config:/app/config:ro
+
+      # Mount logs directory
+      - ./logs:/app/logs
+
+      # For development: mount source code for live reload
+      # - ./chunk_flow:/app/chunk_flow
+
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - chunkflow-network
+
+  # Optional: Redis for caching (future enhancement)
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: chunkflow-redis
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis-data:/data
+  #   restart: unless-stopped
+  #   networks:
+  #     - chunkflow-network
+
+  # Optional: PostgreSQL for storing results (future enhancement)
+  # postgres:
+  #   image: postgres:15-alpine
+  #   container_name: chunkflow-postgres
+  #   environment:
+  #     - POSTGRES_DB=chunkflow
+  #     - POSTGRES_USER=chunkflow
+  #     - POSTGRES_PASSWORD=${DB_PASSWORD:-chunkflow}
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres-data:/var/lib/postgresql/data
+  #   restart: unless-stopped
+  #   networks:
+  #     - chunkflow-network
+
+networks:
+  chunkflow-network:
+    driver: bridge
+
+volumes:
+  # redis-data:
+  # postgres-data:
+  logs:

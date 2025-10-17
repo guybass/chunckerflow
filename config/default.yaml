@@ -1,0 +1,175 @@
+# ChunkFlow Default Configuration
+# This file contains default settings for all chunking strategies, embedding providers, and metrics
+# Override these in environment-specific config files (development.yaml, production.yaml, test.yaml)
+
+version: "1.0.0"  # Config schema version
+
+# Chunking Strategies Configuration
+strategies:
+  fixed_size:
+    v1.0:
+      chunk_size: 512
+      overlap: 50
+      length_function: "char"  # char or token
+
+  recursive:
+    v1.0:
+      chunk_size: 512
+      overlap: 100
+      separators: ["\n\n", "\n", ". ", " ", ""]
+      length_function: "char"
+
+  document_based:
+    v1.0:
+      # Markdown
+      markdown_headers: [
+        "#",
+        "##",
+        "###",
+        "####"
+      ]
+      # HTML
+      html_tags: [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "p",
+        "div"
+      ]
+      # Code
+      code_split_by_class: true
+
+  semantic:
+    v1.0:
+      threshold_percentile: 80
+      buffer_size: 1
+      embedding_model: "all-MiniLM-L6-v2"
+      min_chunk_size: 100
+      max_chunk_size: 2000
+
+  late:
+    v1.0:
+      chunk_size: 256  # tokens
+      max_context_length: 8192
+
+  llm_based:
+    v1.0:
+      model: "gpt-4"
+      max_chunk_size: 1000
+      temperature: 0.0
+
+  agentic:
+    v1.0:
+      mini_chunk_size: 300
+      llm_model: "gpt-4"
+      max_mini_chunks_per_group: 15
+
+# Embedding Providers Configuration
+embeddings:
+  openai:
+    v1.0:
+      model: "text-embedding-3-small"
+      dimensions: null  # Use default
+      batch_size: 100
+      timeout: 30
+
+  huggingface:
+    v1.0:
+      model: "sentence-transformers/all-MiniLM-L6-v2"
+      device: "cpu"  # cpu or cuda
+      batch_size: 32
+      normalize: true
+
+  google:
+    v1.0:
+      model: "gemini-embedding-001"
+      dimensions: 1024
+      task_type: "RETRIEVAL_DOCUMENT"
+      batch_size: 50
+
+  cohere:
+    v1.0:
+      model: "embed-english-v3.0"
+      input_type: "search_document"
+      batch_size: 96
+
+  voyage:
+    v1.0:
+      model: "voyage-3-large"
+      dimensions: 1024
+      input_type: "document"
+      batch_size: 128
+
+  jina:
+    v1.0:
+      model: "jina-embeddings-v3"
+      dimensions: 1024
+      task: "retrieval.passage"
+      batch_size: 100
+
+# Evaluation Metrics Configuration
+metrics:
+  ndcg:
+    v1.0:
+      k: 5  # Top-k for NDCG@k
+      relevance_threshold: 0.5
+
+  recall:
+    v1.0:
+      k: 10
+
+  mrr:
+    v1.0:
+      max_rank: 10
+
+  semantic_coherence:
+    v1.0:
+      embedding_model: "all-MiniLM-L6-v2"
+      aggregation: "mean"  # mean or median
+
+  faithfulness:
+    v1.0:
+      llm_model: "gpt-4"
+      num_claims_to_check: 10
+
+  answer_relevancy:
+    v1.0:
+      num_questions: 3
+      embedding_model: "text-embedding-3-small"
+
+# Processing Settings
+processing:
+  max_concurrent_tasks: 10
+  request_timeout: 300  # seconds
+  batch_size: 100
+  retry_attempts: 3
+  retry_delay: 1.0  # seconds
+  retry_backoff: 2.0
+
+# Cache Settings
+cache:
+  enabled: true
+  ttl: 3600  # seconds
+  max_size_mb: 1000
+
+# API Settings
+api:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 4
+  cors_origins: ["*"]
+  rate_limit_enabled: false
+  rate_limit_per_minute: 100
+
+# Logging Settings
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "console"  # json or console
+  structured: true
+
+# Monitoring Settings
+monitoring:
+  metrics_enabled: true
+  tracing_enabled: false
+  health_check_enabled: true
