@@ -188,29 +188,11 @@ See [rag-summery-framework.md](rag-summery-framework.md) for comprehensive resea
 
 ## Documentation
 
-### Core Documentation
-
-- **[Publishing Guide](docs/BUILD_AND_PUBLISH.md)** - How to publish ChunkFlow to PyPI
-- **[Project Summary](docs/PROJECT_SUMMARY.md)** - Complete project overview
-- **[Security Guide](docs/SECURITY_WARNING.md)** - API token security (important!)
-- **[Quick Reference](docs/QUICK_PUBLISH.txt)** - Publishing quick reference
-
-### Interactive Tutorials
-
-- **[Jupyter Notebooks](examples/jupyter/)** - 5 interactive tutorials
-  - 01: Getting Started
-  - 02: Strategy Comparison
-  - 03: Advanced Metrics
-  - 04: Visualization & Analysis
-  - 05: API Usage
-
-### Code Examples
-
-- **[Python Examples](examples/)** - Working code examples
-  - Basic usage
-  - Strategy comparison
-  - Analysis and visualization
-  - API client usage
+- 📚 **[Documentation Hub](docs/README.md)** - Complete documentation index
+- 🚀 **[Getting Started](docs/GETTING_STARTED.md)** - Installation and quick start
+- 📖 **[API Reference](docs/API_REFERENCE.md)** - Complete API documentation
+- 🐳 **[Docker Guide](docs/DOCKER.md)** - Docker deployment
+- 📓 **[Examples](examples/)** - Code examples and Jupyter notebooks
 
 ## Development
 

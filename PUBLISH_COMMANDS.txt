@@ -1,0 +1,134 @@
+═══════════════════════════════════════════════════════════════════════════
+  CHUNKFLOW - PUBLISH TO PYPI - COPY & PASTE COMMANDS (WINDOWS CMD)
+═══════════════════════════════════════════════════════════════════════════
+
+⚠️ STEP 0: FIX SECURITY FIRST! (DO THIS ONCE)
+───────────────────────────────────────────────────────────────────────────
+
+1. Revoke old token: https://pypi.org/manage/account/token/
+2. Create new token: https://pypi.org/manage/account/token/
+   - Name: chunk-flow
+   - Scope: Entire account
+   - COPY THE TOKEN!
+
+3. Create .pypirc file:
+
+notepad %USERPROFILE%\.pypirc
+
+Paste this (replace YOUR-TOKEN):
+
+[pypi]
+username = __token__
+password = pypi-YOUR-NEW-TOKEN-HERE
+
+Save and close.
+
+═══════════════════════════════════════════════════════════════════════════
+  PUBLISH COMMANDS (COPY THESE IN ORDER)
+═══════════════════════════════════════════════════════════════════════════
+
+REM 1. Navigate to project
+cd "C:\Users\Lenovo i7\Desktop\my_personal_projects\chunckerflow"
+
+REM 2. Verify directory (should show pyproject.toml)
+dir
+
+REM 3. Update CHANGELOG.md date (manual step)
+notepad CHANGELOG.md
+REM Change "## [0.1.0] - UNRELEASED" to "## [0.1.0] - 2025-01-18"
+REM Save and close
+
+REM 4. Clean old builds
+if exist build rmdir /s /q build
+if exist dist rmdir /s /q dist
+
+REM 5. Upgrade build tools
+pip install --upgrade build twine
+
+REM 6. Build package
+python -m build
+
+REM 7. Verify build created files
+dir dist
+REM Should see: chunk_flow-0.1.0-py3-none-any.whl and chunk_flow-0.1.0.tar.gz
+
+REM 8. Validate package
+twine check dist/*
+REM Should see: PASSED for both files
+
+REM 9. Commit to git
+git add .
+git commit -m "chore: prepare release v0.1.0"
+git push origin main
+
+REM 10. WAIT FOR GITHUB ACTIONS (3-5 minutes)
+REM Go to: https://github.com/YOUR-USERNAME/chunk-flow/actions
+REM Wait for green checkmarks ✅
+REM DO NOT CONTINUE until tests pass!
+
+REM 11. Upload to PyPI
+twine upload dist/*
+REM If prompted:
+REM   Username: __token__
+REM   Password: (paste your PyPI token)
+
+REM 12. Create git tag
+git tag -a v0.1.0 -m "Release v0.1.0 - Initial public release"
+git push origin v0.1.0
+
+REM 13. Verify on PyPI
+REM Open: https://pypi.org/project/chunk-flow/
+
+═══════════════════════════════════════════════════════════════════════════
+  DONE! 🎉
+═══════════════════════════════════════════════════════════════════════════
+
+Your package is live at: https://pypi.org/project/chunk-flow/
+
+Test installation:
+pip install chunk-flow
+
+═══════════════════════════════════════════════════════════════════════════
+  TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════════════════
+
+ERROR: "Invalid or non-existent authentication"
+FIX: Check .pypirc file: type %USERPROFILE%\.pypirc
+     Create new PyPI token and update .pypirc
+
+ERROR: "File already exists"
+FIX: Version 0.1.0 already published
+     Bump version in pyproject.toml (e.g., 0.1.1)
+
+ERROR: "python -m build" fails
+FIX: Check Python version: python --version (need 3.9+)
+     Install build: pip install build
+
+ERROR: "twine not found"
+FIX: pip install twine
+
+ERROR: GitHub Actions failing
+FIX: Don't publish until tests pass!
+     Check Actions tab for error details
+
+═══════════════════════════════════════════════════════════════════════════
+  FOR NEXT RELEASE (v0.1.1, v0.2.0, etc.)
+═══════════════════════════════════════════════════════════════════════════
+
+1. Update version in pyproject.toml:
+   version = "0.1.1"
+
+2. Add new section in CHANGELOG.md:
+   ## [0.1.1] - 2025-XX-XX
+   ### Fixed
+   - Bug fixes
+   ### Added
+   - New features
+
+3. Run all commands above (replace v0.1.0 with new version)
+
+═══════════════════════════════════════════════════════════════════════════
+
+Full guide: MANUAL_PUBLISH_GUIDE.md
+Security info: docs/SECURITY_WARNING.md
+Structure: FINAL_STRUCTURE.md

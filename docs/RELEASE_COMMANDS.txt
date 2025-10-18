@@ -1,0 +1,167 @@
+═══════════════════════════════════════════════════════════════
+  COPY-PASTE RELEASE COMMANDS
+═══════════════════════════════════════════════════════════════
+
+COPY AND RUN THESE COMMANDS IN ORDER
+
+══════════════════════════════════════════════════════════════
+STEP 0: FIX SECURITY (DO THIS FIRST!)
+══════════════════════════════════════════════════════════════
+
+1. Go to: https://pypi.org/manage/account/token/
+2. DELETE the old exposed token
+3. CREATE new token (name: chunk-flow, scope: entire account)
+4. Run this:
+
+notepad %USERPROFILE%\.pypirc
+
+5. Paste this (replace YOUR-NEW-TOKEN):
+
+[pypi]
+username = __token__
+password = pypi-YOUR-NEW-TOKEN-HERE
+
+6. Save and close
+
+══════════════════════════════════════════════════════════════
+STEP 1: UPDATE CHANGELOG
+══════════════════════════════════════════════════════════════
+
+notepad CHANGELOG.md
+
+Change line 8 from:
+## [0.1.0] - 2024-01-XX
+
+To:
+## [0.1.0] - 2025-01-17
+
+Save and close.
+
+══════════════════════════════════════════════════════════════
+STEP 2: COMMIT AND PUSH
+══════════════════════════════════════════════════════════════
+
+cd "C:\Users\Lenovo i7\Desktop\my_personal_projects\chunckerflow"
+
+git add .
+
+git commit -m "chore: prepare release v0.1.0"
+
+git push origin main
+
+══════════════════════════════════════════════════════════════
+STEP 3: WAIT FOR GITHUB ACTIONS (5 minutes)
+══════════════════════════════════════════════════════════════
+
+Open: https://github.com/YOUR-USERNAME/chunk-flow/actions
+
+☕ Wait for all green checkmarks ✅
+
+══════════════════════════════════════════════════════════════
+STEP 4: PUBLISH TO PYPI
+══════════════════════════════════════════════════════════════
+
+cd "C:\Users\Lenovo i7\Desktop\my_personal_projects\chunckerflow"
+
+publish_quick.bat
+
+Press any key when prompted.
+Wait for upload to complete.
+
+══════════════════════════════════════════════════════════════
+STEP 5: CREATE GIT TAG
+══════════════════════════════════════════════════════════════
+
+git tag -a v0.1.0 -m "Release v0.1.0"
+
+git push origin v0.1.0
+
+══════════════════════════════════════════════════════════════
+STEP 6: CREATE GITHUB RELEASE
+══════════════════════════════════════════════════════════════
+
+1. Go to: https://github.com/YOUR-USERNAME/chunk-flow/releases/new
+2. Tag: Select "v0.1.0"
+3. Title: ChunkFlow v0.1.0
+4. Description: Copy from CHANGELOG.md (lines 10-90)
+5. Upload files:
+   - dist/chunk-flow-0.1.0.tar.gz
+   - dist/chunk_flow-0.1.0-py3-none-any.whl
+6. Click "Publish release"
+
+══════════════════════════════════════════════════════════════
+STEP 7: VERIFY
+══════════════════════════════════════════════════════════════
+
+Check PyPI:
+https://pypi.org/project/chunk-flow/
+
+Test install:
+
+python -m venv test_env
+
+test_env\Scripts\activate
+
+pip install chunk-flow
+
+python -c "import chunk_flow; print(chunk_flow.__version__)"
+
+deactivate
+
+rmdir /s /q test_env
+
+══════════════════════════════════════════════════════════════
+STEP 8: BUMP TO DEV VERSION
+══════════════════════════════════════════════════════════════
+
+notepad chunk_flow\__init__.py
+
+Change:
+__version__ = "0.1.0"
+
+To:
+__version__ = "0.2.0.dev0"
+
+Save and close.
+
+notepad pyproject.toml
+
+Change line 7:
+version = "0.1.0"
+
+To:
+version = "0.2.0.dev0"
+
+Save and close.
+
+git add chunk_flow\__init__.py pyproject.toml
+
+git commit -m "chore: bump version to 0.2.0.dev0"
+
+git push origin main
+
+══════════════════════════════════════════════════════════════
+DONE! 🎉
+══════════════════════════════════════════════════════════════
+
+Your package is live at:
+https://pypi.org/project/chunk-flow/
+
+Anyone can now install it:
+pip install chunk-flow
+
+Share the news:
+- Twitter/LinkedIn
+- Reddit r/Python
+- Hacker News
+- Your blog
+
+══════════════════════════════════════════════════════════════
+QUICK REFERENCE
+══════════════════════════════════════════════════════════════
+
+Full guide: EASY_RELEASE_GUIDE.md
+Checklist: RELEASE_CHECKLIST.txt
+Security: docs/SECURITY_WARNING.md
+
+══════════════════════════════════════════════════════════════
