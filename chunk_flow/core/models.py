@@ -3,7 +3,7 @@
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
 class ChunkMetadata(BaseModel):
@@ -183,7 +183,6 @@ class Config(BaseModel):
     voyage_api_key: Optional[str] = Field(None, description="Voyage API key")
     jina_api_key: Optional[str] = Field(None, description="Jina API key")
 
-    class Config:
-        """Pydantic config."""
-
-        extra = "allow"  # Allow additional fields for extensibility
+    model_config = ConfigDict(
+        extra="allow",  # Allow additional fields for extensibility
+    )

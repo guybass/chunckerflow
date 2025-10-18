@@ -120,19 +120,19 @@ site/
 # OS
 Thumbs.db
 .DS_Store
-
+clean_notebooks.py
 # Docker
 .dockerignore
-
+C:\Users\Lenovo i7\Desktop\my_personal_projects\chunckerflow\production_setup.md
 # Benchmarks
 benchmarks/results/
 benchmarks/data/
-
+C:\Users\Lenovo i7\Desktop\my_personal_projects\chunckerflow\publish_quick.bat
 # Temporary files
 tmp/
 temp/
 *.tmp
-
+publish.bat
 # Specification files (used during development, not needed in production)
 rag-summery-framework.md
 chunking_framework_spec.md
