@@ -33,7 +33,11 @@ class ChunkingStrategy(Versioned, ABC):
         Raises:
             ConfigurationError: If configuration is invalid
         """
-        self.config = config or self.get_default_config()
+        # Merge provided config with defaults
+        default_config = self.get_default_config()
+        if config:
+            default_config.update(config)
+        self.config = default_config
         self._validate_config()
 
     @abstractmethod

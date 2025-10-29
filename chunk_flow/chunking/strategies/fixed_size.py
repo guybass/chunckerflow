@@ -48,7 +48,7 @@ class FixedSizeChunker(ChunkingStrategy):
         """Get default configuration."""
         return {
             "chunk_size": 512,
-            "overlap": 50,
+            "overlap": 0,
             "length_function": "char",  # char or token
             "encoding_name": "cl100k_base",  # for tiktoken
         }

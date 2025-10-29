@@ -84,15 +84,17 @@ class TestNDCGMetric:
     @pytest.mark.asyncio
     async def test_requires_ground_truth(self, sample_chunks, sample_embeddings):
         """Test that NDCG requires ground truth."""
+        from chunk_flow.core.exceptions import ValidationError
+
         metric = MetricRegistry.create("ndcg_at_k")
 
-        # Should not raise, but may return 0 or handle gracefully
-        # depending on implementation
-        result = await metric.compute(
-            chunks=sample_chunks,
-            embeddings=sample_embeddings,
-            ground_truth=None,
-        )
+        # Should raise ValidationError when ground_truth is None
+        with pytest.raises(ValidationError, match="requires ground truth"):
+            await metric.compute(
+                chunks=sample_chunks,
+                embeddings=sample_embeddings,
+                ground_truth=None,
+            )
 
 
 class TestMetricRegistry:

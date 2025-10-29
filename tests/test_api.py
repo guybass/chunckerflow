@@ -1,7 +1,7 @@
 """Tests for FastAPI application."""
 
 import pytest
-from httpx import AsyncClient
+from httpx import AsyncClient, ASGITransport
 
 from chunk_flow.api.app import app
 
@@ -12,7 +12,7 @@ class TestAPIEndpoints:
 
     async def test_health_check(self):
         """Test health check endpoint."""
-        async with AsyncClient(app=app, base_url="http://test") as client:
+        async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
             response = await client.get("/health")
 
         assert response.status_code == 200
@@ -23,7 +23,7 @@ class TestAPIEndpoints:
 
     async def test_chunk_endpoint(self, sample_text):
         """Test chunking endpoint."""
-        async with AsyncClient(app=app, base_url="http://test") as client:
+        async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
             response = await client.post(
                 "/chunk",
                 json={
@@ -41,7 +41,7 @@ class TestAPIEndpoints:
 
     async def test_chunk_invalid_strategy(self, sample_text):
         """Test chunking with invalid strategy."""
-        async with AsyncClient(app=app, base_url="http://test") as client:
+        async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
             response = await client.post(
                 "/chunk",
                 json={
@@ -54,7 +54,7 @@ class TestAPIEndpoints:
 
     async def test_evaluate_endpoint(self, sample_chunks, sample_embeddings):
         """Test evaluation endpoint."""
-        async with AsyncClient(app=app, base_url="http://test") as client:
+        async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
             response = await client.post(
                 "/evaluate",
                 json={
@@ -71,7 +71,7 @@ class TestAPIEndpoints:
 
     async def test_list_strategies(self):
         """Test listing strategies endpoint."""
-        async with AsyncClient(app=app, base_url="http://test") as client:
+        async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
             response = await client.get("/strategies")
 
         assert response.status_code == 200
@@ -81,7 +81,7 @@ class TestAPIEndpoints:
 
     async def test_list_metrics(self):
         """Test listing metrics endpoint."""
-        async with AsyncClient(app=app, base_url="http://test") as client:
+        async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
             response = await client.get("/metrics")
 
         assert response.status_code == 200
@@ -91,7 +91,7 @@ class TestAPIEndpoints:
 
     async def test_list_providers(self):
         """Test listing providers endpoint."""
-        async with AsyncClient(app=app, base_url="http://test") as client:
+        async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
             response = await client.get("/providers")
 
         assert response.status_code == 200
