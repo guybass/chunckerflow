@@ -10,7 +10,10 @@ readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "MIT"}
 authors = [
-    {name = "ChunkFlow Contributors"}
+    {name = "Guy Basson", email = "guy-shal.huji.ac.il@mail.huji.ac.il"}
+]
+maintainers = [
+    {name = "Guy Basson", email = "guy-shal.huji.ac.il@mail.huji.ac.il"}
 ]
 keywords = [
     "chunking",

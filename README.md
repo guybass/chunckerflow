@@ -1,21 +1,21 @@
-# ChunkFlow
+# ChunckerFlow
 
 **Production-grade async text chunking framework for RAG systems**
 
-[![PyPI version](https://badge.fury.io/py/chunk-flow.svg)](https://badge.fury.io/py/chunk-flow)
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/chunk-flow)](https://pypi.org/project/chunk-flow/)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/chunk-flow)](https://pypi.org/project/chunk-flow/)
+[![PyPI version](https://badge.fury.io/py/chunckerflow.svg)](https://badge.fury.io/py/chunckerflow)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/chunckerflow)](https://pypi.org/project/chunckerflow/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/chunckerflow)](https://pypi.org/project/chunckerflow/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![GitHub stars](https://img.shields.io/github/stars/chunkflow/chunk-flow?style=social)](https://github.com/chunkflow/chunk-flow)
+[![GitHub stars](https://img.shields.io/github/stars/guybass/chunckerflow?style=social)](https://github.com/guybass/chunckerflow)
 
-ChunkFlow is a comprehensive, extensible framework for text chunking in Retrieval-Augmented Generation (RAG) systems. Built with production-grade practices, it provides multiple chunking strategies, pluggable embedding providers, and comprehensive evaluation metrics to help you make data-driven decisions.
+ChunckerFlow is a comprehensive, extensible framework for text chunking in Retrieval-Augmented Generation (RAG) systems. Built with production-grade practices, it provides multiple chunking strategies, pluggable embedding providers, and comprehensive evaluation metrics to help you make data-driven decisions.
 
-## Why ChunkFlow?
+## Why ChunckerFlow?
 
 RAG systems process billions of documents daily, and **chunking quality directly impacts retrieval accuracy, computational costs, and user experience**. Poor chunking causes hallucinations, missed context, and wasted API calls.
 
-ChunkFlow addresses this with:
+ChunckerFlow addresses this with:
 - **6+ chunking strategies** - From simple fixed-size to revolutionary late chunking
 - **Pluggable architecture** - Easy integration with any embedding provider
 - **Comprehensive evaluation** - 12+ metrics including RAGAS-inspired, NDCG, semantic coherence
@@ -51,17 +51,17 @@ ChunkFlow addresses this with:
 
 ```bash
 # Basic installation
-pip install chunk-flow
+pip install chunckerflow
 
 # With specific providers
-pip install chunk-flow[openai]
-pip install chunk-flow[huggingface]
+pip install chunckerflow[openai]
+pip install chunckerflow[huggingface]
 
 # With API server
-pip install chunk-flow[api]
+pip install chunckerflow[api]
 
 # Everything
-pip install chunk-flow[all]
+pip install chunckerflow[all]
 ```
 
 ### Basic Usage
@@ -198,8 +198,8 @@ See [rag-summery-framework.md](rag-summery-framework.md) for comprehensive resea
 
 ```bash
 # Clone repository
-git clone https://github.com/chunkflow/chunk-flow.git
-cd chunk-flow
+git clone https://github.com/guybass/chunckerflow.git
+cd chunckerflow
 
 # Install with dev dependencies
 make install-dev
@@ -219,9 +219,9 @@ make ci
 
 ChunkFlow is currently a solo project. While contributions are not being accepted at this time, you can:
 
-- **Report Bugs**: [GitHub Issues](https://github.com/chunkflow/chunk-flow/issues)
-- **Request Features**: [GitHub Issues](https://github.com/chunkflow/chunk-flow/issues)
-- **Ask Questions**: [GitHub Discussions](https://github.com/chunkflow/chunk-flow/discussions)
+- **Report Bugs**: [GitHub Issues](https://github.com/guybass/chunckerflow/issues)
+- **Request Features**: [GitHub Issues](https://github.com/guybass/chunckerflow/issues)
+- **Ask Questions**: [GitHub Discussions](https://github.com/guybass/chunckerflow/discussions)
 - **Star the Repo**: Help spread the word!
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
@@ -274,7 +274,7 @@ If you use ChunkFlow in your research, please cite:
   title = {ChunkFlow: Production-Grade Text Chunking Framework for RAG Systems},
   author = {ChunkFlow Development},
   year = {2024},
-  url = {https://github.com/chunkflow/chunk-flow}
+  url = {https://github.com/guybass/chunckerflow}
 }
 ```
 
@@ -286,4 +286,4 @@ ChunkFlow builds on research from Jina AI, ExplodingGradients, and the broader R
 
 **Built with passion for the neglected field of text chunking** 🚀
 
-[Documentation](https://chunk-flow.readthedocs.io) | [GitHub](https://github.com/chunkflow/chunk-flow) | [PyPI](https://pypi.org/project/chunk-flow/)
+[Documentation](https://chunckerflow.readthedocs.io) | [GitHub](https://github.com/guybass/chunckerflow) | [PyPI](https://pypi.org/project/chunckerflow/)

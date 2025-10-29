@@ -1,10 +1,10 @@
-# Contributing to ChunkFlow
+# Contributing to ChunckerFlow
 
-Thank you for your interest in ChunkFlow!
+Thank you for your interest in ChunckerFlow!
 
 ## Project Status
 
-ChunkFlow is currently a **solo project** developed and maintained by a single author. While the codebase is open-source and available for use under the MIT License, **contributions are not currently being accepted**.
+ChunckerFlow is currently a **solo project** developed and maintained by a single author. While the codebase is open-source and available for use under the MIT License, **contributions are not currently being accepted**.
 
 ## How You Can Help
 
@@ -13,7 +13,7 @@ While we're not accepting code contributions at this time, you can still help:
 - **Report Bugs**: Open GitHub Issues with detailed bug reports
 - **Suggest Features**: Share your ideas via GitHub Issues
 - **Spread the Word**: Star the repo, share on social media
-- **Use ChunkFlow**: Build amazing things and share your experiences
+- **Use ChunckerFlow**: Build amazing things and share your experiences
 
 ## Reporting Bugs
 
@@ -45,7 +45,7 @@ Actual: Raises IndexError
 
 Environment:
 - Python 3.11.2
-- chunk-flow 0.1.0
+- chunckerflow 0.1.0
 - OS: Windows 11
 
 Error Traceback:
@@ -155,7 +155,7 @@ async def chunk_text(
 
 ## License
 
-By using ChunkFlow, you agree to the terms of the MIT License. See [LICENSE](LICENSE) for details.
+By using ChunckerFlow, you agree to the terms of the MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
