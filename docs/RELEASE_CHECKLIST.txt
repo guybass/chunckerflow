@@ -1,0 +1,155 @@
+═══════════════════════════════════════════════════════════════
+  CHUNKFLOW v0.1.0 RELEASE CHECKLIST
+═══════════════════════════════════════════════════════════════
+
+Print this and check off as you go! ⬜ → ✅
+
+BEFORE YOU START
+═══════════════════════════════════════════════════════════════
+
+⬜ CRITICAL: Revoke old PyPI token
+   → https://pypi.org/manage/account/token/
+
+⬜ Create NEW PyPI token
+   → Name: chunk-flow
+   → Scope: Entire account
+
+⬜ Update .pypirc with new token
+   → notepad %USERPROFILE%\.pypirc
+   → [pypi]
+   → username = __token__
+   → password = pypi-YOUR-NEW-TOKEN-HERE
+
+RELEASE STEPS
+═══════════════════════════════════════════════════════════════
+
+⬜ 1. Update version (ALREADY DONE!)
+   → chunk_flow/__init__.py: __version__ = "0.1.0"
+   → pyproject.toml: version = "0.1.0"
+
+⬜ 2. Update CHANGELOG.md
+   → Change line 8: ## [0.1.0] - 2025-01-17
+
+⬜ 3. Commit changes
+   → git add .
+   → git commit -m "chore: prepare release v0.1.0"
+
+⬜ 4. Push to GitHub
+   → git push origin main
+
+⬜ 5. Wait for GitHub Actions ✅
+   → https://github.com/YOUR-USERNAME/chunk-flow/actions
+   → ☕ All tests must pass!
+
+⬜ 6. Publish to PyPI
+   → publish_quick.bat
+   → Press any key when prompted
+   → Wait for upload...
+
+⬜ 7. Create git tag
+   → git tag -a v0.1.0 -m "Release v0.1.0"
+   → git push origin v0.1.0
+
+⬜ 8. Create GitHub release
+   → https://github.com/YOUR-USERNAME/chunk-flow/releases/new
+   → Tag: v0.1.0
+   → Title: ChunkFlow v0.1.0
+   → Upload dist/*.tar.gz and dist/*.whl
+   → Publish
+
+⬜ 9. Test installation
+   → pip install chunk-flow
+   → python -c "import chunk_flow; print(chunk_flow.__version__)"
+
+⬜ 10. Bump to dev version
+   → chunk_flow/__init__.py: __version__ = "0.2.0.dev0"
+   → pyproject.toml: version = "0.2.0.dev0"
+   → git commit -am "chore: bump version to 0.2.0.dev0"
+   → git push
+
+QUICK COMMANDS
+═══════════════════════════════════════════════════════════════
+
+cd "C:\Users\Lenovo i7\Desktop\my_personal_projects\chunckerflow"
+
+git add .
+git commit -m "chore: prepare release v0.1.0"
+git push origin main
+
+publish_quick.bat
+
+git tag -a v0.1.0 -m "Release v0.1.0"
+git push origin v0.1.0
+
+VERIFICATION
+═══════════════════════════════════════════════════════════════
+
+⬜ Package on PyPI
+   → https://pypi.org/project/chunk-flow/
+
+⬜ GitHub release created
+   → https://github.com/YOUR-USERNAME/chunk-flow/releases
+
+⬜ Installation works
+   → pip install chunk-flow
+
+⬜ README badges showing
+   → Downloads, version, etc.
+
+CELEBRATE! 🎉
+═══════════════════════════════════════════════════════════════
+
+⬜ Share on Twitter/LinkedIn
+⬜ Post on Reddit r/Python
+⬜ Submit to Hacker News
+⬜ Tell your friends!
+
+Package URL: https://pypi.org/project/chunk-flow/
+Install: pip install chunk-flow
+
+TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════
+
+❌ Invalid credentials
+   → Check %USERPROFILE%\.pypirc
+   → Verify token is correct
+
+❌ Version exists
+   → Increment to 0.1.1
+   → Rebuild and upload
+
+❌ Tests failed
+   → DON'T publish!
+   → Fix tests first
+   → Push and wait for green ✅
+
+❌ Import error after install
+   → Wait 2 minutes for PyPI to index
+   → Try again
+
+TIME ESTIMATE
+═══════════════════════════════════════════════════════════════
+
+Step 1-2: 5 min (Update version/changelog)
+Step 3-4: 2 min (Commit/push)
+Step 5:   5 min (Wait for CI) ☕
+Step 6:   2 min (Publish)
+Step 7-8: 3 min (Tag/release)
+Step 9-10: 3 min (Test/cleanup)
+
+TOTAL: ~20 minutes
+
+SUPPORT
+═══════════════════════════════════════════════════════════════
+
+Full guide: EASY_RELEASE_GUIDE.md
+Security: docs/SECURITY_WARNING.md
+Quick ref: docs/QUICK_PUBLISH.txt
+
+═══════════════════════════════════════════════════════════════
+
+VERSION: 0.1.0
+DATE: 2025-01-17
+STATUS: Ready to release! 🚀
+
+═══════════════════════════════════════════════════════════════
