@@ -3,7 +3,8 @@
 **Production-grade async text chunking framework for RAG systems**
 
 [![PyPI version](https://badge.fury.io/py/chunckerflow.svg)](https://badge.fury.io/py/chunckerflow)
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/chunckerflow)](https://pypi.org/project/chunckerflow/)
+[![Downloads](https://static.pepy.tech/badge/chunckerflow)](https://pepy.tech/project/chunckerflow)
+[![Downloads](https://static.pepy.tech/badge/chunckerflow/month)](https://pepy.tech/project/chunckerflow)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/chunckerflow)](https://pypi.org/project/chunckerflow/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
